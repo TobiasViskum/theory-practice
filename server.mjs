@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static("dist"));
 
 app.post("/sendNotification", (req, res) => {
-  webPush.setVapidDetails("https://localhost:3000", publicKey, privateKey);
+  webPush.setVapidDetails("https://dev04.reactprojects.mywire.org", publicKey, privateKey);
 
   const body = req.body;
   const subscription = body.subscription;
