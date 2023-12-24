@@ -12,11 +12,12 @@ self.addEventListener("install", (e) => {
 self.addEventListener("fetch", (e) => {
   e.respondWith(
     (async () => {
+      // console.log(e.request.url);
+
       const cache = await caches.open(cacheName);
       try {
         const response = await fetch(e.request);
-        await cache.delete(e.request);
-        await cache.put(e.request, response.clone());
+        cache.put(e.request, response.clone());
         return response;
       } catch (err) {
         const r = await caches.match(e.request);
@@ -25,14 +26,5 @@ self.addEventListener("fetch", (e) => {
         }
       }
     })()
-  );
-});
-
-self.addEventListener("push", function (event) {
-  event.waitUntil(
-    self.registration.showNotification("This is the title", {
-      body: "This is the body",
-      tag: "Notification",
-    })
   );
 });
