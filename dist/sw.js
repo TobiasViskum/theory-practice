@@ -30,14 +30,21 @@ self.addEventListener("install", (e) => {
 // });
 
 self.addEventListener("push", function (event) {
-  var options = {
-    body: "This is a message from your app!",
-    icon: "images/icon.png",
-    badge: "images/badge.png",
-  };
+  // var options = {
+  //   body: "This is a message from your app!",
+  //   icon: "images/icon.png",
+  //   badge: "images/badge.png",
+  // };
 
-  const notification = new self.Notification(title, {
-    body: "sdfsdfj",
-    tag: "simple-push-demo-notification",
-  });
+  // const notification = new self.Notification("sdfsdf", {
+  //   body: "sdfsdfj",
+  //   tag: "simple-push-demo-notification",
+  // });
+
+  event.waitUntil(
+    self.registration.showNotification("sdfsdf", {
+      body: "sdfsdfj",
+      tag: "simple-push-demo-notification",
+    })
+  );
 });
