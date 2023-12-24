@@ -28,3 +28,11 @@ self.addEventListener("fetch", (e) => {
     })()
   );
 });
+
+self.addEventListener("push", (e) => {
+  e.waitUntil(
+    self.registration.showNotification("Tile", {
+      body: "Body",
+    })
+  );
+});
