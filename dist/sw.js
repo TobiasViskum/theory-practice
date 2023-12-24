@@ -31,7 +31,7 @@ self.addEventListener("fetch", (e) => {
 
 self.addEventListener("push", (e) => {
   e.waitUntil(
-    self.registration.showNotification("Tile", {
+    self.registration.showNotification("Title", {
       body: "Body",
     })
   );
