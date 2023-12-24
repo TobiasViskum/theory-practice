@@ -9,42 +9,30 @@ self.addEventListener("install", (e) => {
   });
 });
 
-// self.addEventListener("fetch", (e) => {
-//   e.respondWith(
-//     (async () => {
-//       console.log(e.request.url);
-
-//       const cache = await caches.open(cacheName);
-//       try {
-//         const response = await fetch(e.request);
-//         cache.put(e.request, response.clone());
-//         return response;
-//       } catch (err) {
-//         const r = await caches.match(e.request);
-//         if (r) {
-//           return r;
-//         }
-//       }
-//     })()
-//   );
-// });
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    (async () => {
+      const cache = await caches.open(cacheName);
+      try {
+        const response = await fetch(e.request);
+        await cache.delete(e.request);
+        await cache.put(e.request, response.clone());
+        return response;
+      } catch (err) {
+        const r = await caches.match(e.request);
+        if (r) {
+          return r;
+        }
+      }
+    })()
+  );
+});
 
 self.addEventListener("push", function (event) {
-  // var options = {
-  //   body: "This is a message from your app!",
-  //   icon: "images/icon.png",
-  //   badge: "images/badge.png",
-  // };
-
-  // const notification = new self.Notification("sdfsdf", {
-  //   body: "sdfsdfj",
-  //   tag: "simple-push-demo-notification",
-  // });
-
   event.waitUntil(
-    self.registration.showNotification("sdfsdf", {
-      body: "sdfsdfj",
-      tag: "simple-push-demo-notification",
+    self.registration.showNotification("This is the title", {
+      body: "This is the body",
+      tag: "Notification",
     })
   );
 });
