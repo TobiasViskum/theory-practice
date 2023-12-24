@@ -16,11 +16,12 @@ app.post("/sendNotification", (req, res) => {
 
   const body = req.body;
   const subscription = body.subscription;
+
   const payload = body.payload;
   const options = {
     TTL: 3600,
   };
-  const delaySec = 10;
+  const delaySec = 0;
   setTimeout(() => {
     webPush
       .sendNotification(subscription, payload, options)
